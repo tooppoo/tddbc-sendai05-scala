@@ -1,6 +1,6 @@
 package com.tooppoo
 
-case class GridPointSet(g1: GridPoint, g2: GridPoint) {
+case class GridPointSet(g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
   def contains(grid: GridPoint): Boolean = g1 == grid || g2 == grid
 
   def isConnected: Boolean = g1 isNeighborOf g2

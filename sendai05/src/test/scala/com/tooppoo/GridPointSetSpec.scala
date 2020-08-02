@@ -36,20 +36,20 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *       [x] Bに一致
  *       [x] Cに一致
  *       [x] 全てに一致しない
- *     [ ] 格子点集合に含まれる任意の格子点について
+ *     [x] 格子点集合に含まれる任意の格子点について
  *         その格子点から隣り合っている格子点のみを経由して
  *         その他全ての格子点へ到達できる場合に限り
  *         その格子点集合が連結しているものとします
  *         [x] A-B A-Cが連結 ( |_ ）: true
- *         [ ] B-A B-Cが連結 ( |_ ）: true
- *         [ ] C-A C-Bが連結 ( |_ ）: true
- *         [ ] A-B B-Cが連結（ -- ) : true
- *         [ ] A-C C-Bが連結（ -- ) : true
- *         [ ] B-A A-Cが連結（ -- ) : true
- *         [ ] A-B 連結 （ | . )   : false
- *         [ ] B-C 連結 （ | . )   : false
- *         [ ] A-C 連結 （ | . )   : false
- *         [ ] 連結無し （ . . . )   : false
+ *         [x] B-A B-Cが連結 ( |_ ）: true
+ *         [x] C-A C-Bが連結 ( |_ ）: true
+ *         [x] A-B B-Cが連結（ -- ) : true
+ *         [x] A-C C-Bが連結（ -- ) : true
+ *         [x] B-A A-Cが連結（ -- ) : true
+ *         [x] A-B 連結 （ | . )   : false
+ *         [x] B-C 連結 （ | . )   : false
+ *         [x] A-C 連結 （ | . )   : false
+ *         [x] 連結無し （ . . . )   : false
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -186,6 +186,13 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         ("A-B, A-C 連結 |_", GridPoint(4, 4), GridPoint(4, 5), GridPoint(5, 4), true),
         ("B-A, B-C 連結 |_", GridPoint(4, 5), GridPoint(4, 4), GridPoint(5, 4), true),
         ("C-A, C-B 連結 |_", GridPoint(4, 5), GridPoint(5, 4), GridPoint(4, 4), true),
+        ("A-B, B-Cが連結 --", GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4), true),
+        ("A-C, C-Bが連結 --", GridPoint(4, 4), GridPoint(6, 4), GridPoint(5, 4), true),
+        ("B-A, A-Cが連結 --", GridPoint(5, 4), GridPoint(4, 4), GridPoint(6, 4), true),
+        ("A-Bが連結 | .", GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 5), false),
+        ("B-Cが連結 | .", GridPoint(6, 5), GridPoint(4, 4), GridPoint(5, 4), false),
+        ("A-Cが連結 | .", GridPoint(4, 4), GridPoint(6, 5), GridPoint(5, 4), false),
+        ("連結無し", GridPoint(4, 4), GridPoint(6, 5), GridPoint(5, 3), false),
       )
 
       forAll(set) { (caseName, gridA, gridB, gridC, expected) =>

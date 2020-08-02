@@ -24,7 +24,6 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *     [x] AがBの下
  *     [x] AがBの左下
  *  [x] 格子点集合を、異なる２つまたは３つの格子点を含むことが出来るように拡張してください
- *     (補足) 格子点集合に含まれる任意の格子点について、その格子点から隣り合っている格子点のみを経由してその他全ての格子点へ到達できる場合に限り、その格子点集合が連結しているものとします
  *     [x] 3つの格子点を受け取れるようにする
  *       [x] 全ての格子点の座標が異なる: OK
  *       [x] 2つの格子点の座標が同じ  : NG
@@ -32,6 +31,15 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         [x] A・B・Cのうち、B・Cが一致
  *         [x] A・B・Cのうち、C・Aが一致
  *       [x] 全ての格子点の座標が同じ  : NG
+ *     [x] 格子点を含むか
+ *       [x] Aに一致
+ *       [x] Bに一致
+ *       [x] Cに一致
+ *       [x] 全てに一致しない
+ *     [ ] 格子点集合に含まれる任意の格子点について
+ *         その格子点から隣り合っている格子点のみを経由して
+ *         その他全ての格子点へ到達できる場合に限り
+ *         その格子点集合が連結しているものとします
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -103,6 +111,28 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         ("Aと一致", GridPoint(4, 7), true),
         ("Bと一致", GridPoint(2, 5), true),
         ("A/B両方と不一致", GridPoint(3, 6), false),
+      )
+
+      forAll(grids) { (caseName, grid, expected) =>
+        describe(caseName) {
+          describe(s"${grid.notation}") {
+            assert((set contains grid) == expected)
+          }
+        }
+      }
+    }
+    describe("A: (4,7), B: (2, 5), C: (3, 6)") {
+      val a = GridPoint(4, 7)
+      val b = GridPoint(2, 5)
+      val c = GridPoint(3, 6)
+      val set = GridPointSet(a, b, c)
+
+      val grids = Table(
+        ("case name", "grid", "expected"),
+        ("Aと一致", GridPoint(4, 7), true),
+        ("Bと一致", GridPoint(2, 5), true),
+        ("Cと一致", GridPoint(2, 5), true),
+        ("A/B/C全てと不一致", GridPoint(1, 2), false),
       )
 
       forAll(grids) { (caseName, grid, expected) =>

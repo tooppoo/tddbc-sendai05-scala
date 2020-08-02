@@ -40,11 +40,16 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         その格子点から隣り合っている格子点のみを経由して
  *         その他全ての格子点へ到達できる場合に限り
  *         その格子点集合が連結しているものとします
- *         [ ] A,B,C が連結: true
- *         [ ] A,B が連結: false
- *         [ ] B,C が連結: false
- *         [ ] C,B が連結: false
- *         [ ] 連結無し: false
+ *         [x] A-B A-Cが連結 ( |_ ）: true
+ *         [ ] B-A B-Cが連結 ( |_ ）: true
+ *         [ ] C-A C-Bが連結 ( |_ ）: true
+ *         [ ] A-B B-Cが連結（ -- ) : true
+ *         [ ] A-C C-Bが連結（ -- ) : true
+ *         [ ] B-A A-Cが連結（ -- ) : true
+ *         [ ] A-B 連結 （ | . )   : false
+ *         [ ] B-C 連結 （ | . )   : false
+ *         [ ] A-C 連結 （ | . )   : false
+ *         [ ] 連結無し （ . . . )   : false
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -178,8 +183,8 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
     describe("格子点がA,B,Cの3つ") {
       val set = Table(
         ("case name", "gird a", "grid b", "grid c", "expected"),
-        ("A,B,C全て隣接", GridPoint(4, 4), GridPoint(3, 4), GridPoint(4, 5), true),
-        ("A,Bが隣接", GridPoint(4, 4), GridPoint(3, 4), GridPoint(3, 5), false),
+        ("A-B, A-C 連結 |_", GridPoint(4, 4), GridPoint(4, 5), GridPoint(5, 4), true),
+        ("A-B, B-C 連結 |_", GridPoint(4, 4), GridPoint(4, 5), GridPoint(5, 4), true),
       )
 
       forAll(set) { (caseName, gridA, gridB, gridC, expected) =>

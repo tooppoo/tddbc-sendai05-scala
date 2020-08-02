@@ -60,4 +60,22 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
       }
     }
   }
+  describe("格子点集合が連結している(connected)か") {
+    val set = Table(
+      ("case name", "gird a", "grid b", "expected"),
+      ("AがBの左隣", GridPoint(4, 7), GridPoint(5, 7), true)
+    )
+
+    forAll(set) { (caseName, gridA, gridB, expected) =>
+      describe(caseName) {
+        describe(s"A: ${gridA.notation} B: ${gridB.notation}") {
+          it(s"$expected") {
+            val set = GridPointSet(gridA, gridB)
+
+            assert(set.isConnected == expected)
+          }
+        }
+      }
+    }
+  }
 }

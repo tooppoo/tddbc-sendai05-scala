@@ -7,7 +7,7 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
     throw new IllegalArgumentException("g1 and g2 must not same")
   }
 
-  def contains(grid: GridPoint): Boolean = g1 == grid || g2 == grid
+  def contains(grid: GridPoint): Boolean = allGrids.contains(grid)
 
   def isConnected: Boolean = g1 isNeighborOf g2
 

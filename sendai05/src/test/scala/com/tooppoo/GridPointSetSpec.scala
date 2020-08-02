@@ -73,6 +73,20 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
           }
         }
       }
+      describe("格子点が3つ[A, B, C]") {
+        val cases = Table(
+          ("case name", "create set"),
+          ("A・Bが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(3, 2)))
+        )
+
+        forAll(cases) { (caseName, create) =>
+          it(caseName) {
+            assertThrows[IllegalArgumentException] {
+              create()
+            }
+          }
+        }
+      }
     }
   }
   describe("格子点集合[A, B]が、指定した格子点を含む(contains)か") {

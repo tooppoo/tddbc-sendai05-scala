@@ -6,6 +6,7 @@ case class GridPoint(x: Int, y: Int) {
   def isNeighborOf(other: GridPoint): Boolean = {
     x - 1 == other.x ||
       x + 1 == other.x ||
-      y - 1 == other.y
+      y - 1 == other.y ||
+      y + 1 == other.y
   }
 }

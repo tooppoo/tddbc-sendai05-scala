@@ -80,7 +80,8 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
       val gridA = GridPoint(4, 7)
       val grids = Table(
         ("case name", "gridB", "expected"),
-        ("x-1", GridPoint(3, 7), true)
+        ("x-1", GridPoint(3, 7), true),
+        ("x-2", GridPoint(2, 7), false),
       )
 
       forAll(grids) { (caseName, gridB, expected) =>

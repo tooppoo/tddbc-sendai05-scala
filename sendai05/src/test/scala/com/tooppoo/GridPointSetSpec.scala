@@ -27,10 +27,10 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *     (補足) 格子点集合に含まれる任意の格子点について、その格子点から隣り合っている格子点のみを経由してその他全ての格子点へ到達できる場合に限り、その格子点集合が連結しているものとします
  *     [ ] 3つの格子点を受け取れるようにする
  *       [x] 全ての格子点の座標が異なる: OK
- *       [ ] 2つの格子点の座標が同じ  : NG
- *         [ ] A・B・Cのうち、A・Bが一致
- *         [ ] A・B・Cのうち、B・Cが一致
- *         [ ] A・B・Cのうち、C・Aが一致
+ *       [x] 2つの格子点の座標が同じ  : NG
+ *         [x] A・B・Cのうち、A・Bが一致
+ *         [x] A・B・Cのうち、B・Cが一致
+ *         [x] A・B・Cのうち、C・Aが一致
  *       [ ] 全ての格子点の座標が同じ  : NG
  */
 
@@ -78,6 +78,7 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
           ("case name", "create set"),
           ("A・Bが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(3, 2))),
           ("B・Cが同じ座標を持つ", () => GridPointSet(GridPoint(3, 2), GridPoint(4, 7), GridPoint(4, 7))),
+          ("C・Aが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(3, 2), GridPoint(4, 7))),
         )
 
         forAll(cases) { (caseName, create) =>

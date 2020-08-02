@@ -1,7 +1,11 @@
 package com.tooppoo
 
 class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
-  if (g1 == g2) throw new IllegalArgumentException("g1 and g2 must not same")
+  private val allGrids: Seq[GridPoint] = Seq(g1, g2) concat grids
+
+  if (allGrids.groupBy(g => g.notation).size != allGrids.size) {
+    throw new IllegalArgumentException("g1 and g2 must not same")
+  }
 
   def contains(grid: GridPoint): Boolean = g1 == grid || g2 == grid
 

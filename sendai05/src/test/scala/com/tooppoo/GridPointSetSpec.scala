@@ -137,13 +137,13 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         ("case name", "grid", "expected"),
         ("Aと一致", GridPoint(4, 7), true),
         ("Bと一致", GridPoint(2, 5), true),
-        ("Cと一致", GridPoint(2, 5), true),
+        ("Cと一致", GridPoint(3, 6), true),
         ("A/B/C全てと不一致", GridPoint(1, 2), false),
       )
 
       forAll(grids) { (caseName, grid, expected) =>
         describe(caseName) {
-          describe(s"${grid.notation}") {
+          it(s"${grid.notation}") {
             assert((set contains grid) == expected)
           }
         }

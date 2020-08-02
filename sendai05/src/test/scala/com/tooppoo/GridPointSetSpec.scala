@@ -219,5 +219,12 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         assert(set.count == 2)
       }
     }
+    describe("集合[A, B, C]") {
+      it("3") {
+        val set = GridPointSet(GridPoint(3, 4), GridPoint(4, 5), GridPoint(2, 1))
+
+        assert(set.count == 3)
+      }
+    }
   }
 }

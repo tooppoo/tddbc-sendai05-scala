@@ -3,7 +3,7 @@ package com.tooppoo
 class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
   private val allGrids: Seq[GridPoint] = Seq(g1, g2) concat grids
 
-  val count: Int = 2
+  val count: Int = allGrids.size
 
   if (existDuplicateGrid) {
     throw new IllegalArgumentException("g1 and g2 must not same")

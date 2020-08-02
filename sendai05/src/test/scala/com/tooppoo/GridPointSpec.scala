@@ -69,8 +69,10 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
 
       forAll(grids) { (caseName, gridB, expected) =>
         describe(caseName) {
-          it(s"$expected") {
-            assert((gridA == gridB) == expected)
+          describe(s"B = ${gridB.notation}") {
+            it(s"$expected") {
+              assert((gridA == gridB) == expected)
+            }
           }
         }
       }
@@ -101,8 +103,10 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
 
       forAll(grids) { (caseName, gridB, expected) =>
         describe(caseName) {
-          it(s"$expected") {
-            assert((gridA isNeighborOf gridB) == expected)
+          describe(s"B = ${gridB.notation}") {
+            it(s"$expected") {
+              assert((gridA isNeighborOf gridB) == expected)
+            }
           }
         }
       }

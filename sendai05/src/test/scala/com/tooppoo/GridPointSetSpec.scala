@@ -40,6 +40,12 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         その格子点から隣り合っている格子点のみを経由して
  *         その他全ての格子点へ到達できる場合に限り
  *         その格子点集合が連結しているものとします
+ *         →全ての格子点が連結している場合に、集合は連結している
+ *         [ ] A,B,C が連結: true
+ *         [ ] A,B が連結: false
+ *         [ ] B,C が連結: false
+ *         [ ] C,B が連結: false
+ *         [ ] 連結無し: false
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -145,25 +151,48 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
     }
   }
   describe("格子点集合が連結している(connected)か") {
-    val set = Table(
-      ("case name", "gird a", "grid b", "expected"),
-      ("AがBの左隣", GridPoint(4, 7), GridPoint(5, 7), true),
-      ("AがBの左上", GridPoint(4, 8), GridPoint(5, 7), false),
-      ("AがBの上", GridPoint(5, 8), GridPoint(5, 7), true),
-      ("AがBの右上", GridPoint(6, 8), GridPoint(5, 7), false),
-      ("AがBの右", GridPoint(6, 7), GridPoint(5, 7), true),
-      ("AがBの右下", GridPoint(6, 6), GridPoint(5, 7), false),
-      ("AがBの下", GridPoint(5, 6), GridPoint(5, 7), true),
-      ("AがBの左下", GridPoint(4, 6), GridPoint(5, 7), false),
-    )
+    describe("格子点がA,Bの2つ") {
+      val set = Table(
+        ("case name", "gird a", "grid b", "expected"),
+        ("AがBの左隣", GridPoint(4, 7), GridPoint(5, 7), true),
+        ("AがBの左上", GridPoint(4, 8), GridPoint(5, 7), false),
+        ("AがBの上", GridPoint(5, 8), GridPoint(5, 7), true),
+        ("AがBの右上", GridPoint(6, 8), GridPoint(5, 7), false),
+        ("AがBの右", GridPoint(6, 7), GridPoint(5, 7), true),
+        ("AがBの右下", GridPoint(6, 6), GridPoint(5, 7), false),
+        ("AがBの下", GridPoint(5, 6), GridPoint(5, 7), true),
+        ("AがBの左下", GridPoint(4, 6), GridPoint(5, 7), false),
+      )
 
-    forAll(set) { (caseName, gridA, gridB, expected) =>
-      describe(caseName) {
-        describe(s"A: ${gridA.notation} B: ${gridB.notation}") {
-          it(s"$expected") {
-            val set = GridPointSet(gridA, gridB)
+      forAll(set) { (caseName, gridA, gridB, expected) =>
+        describe(caseName) {
+          describe(s"A: ${gridA.notation} B: ${gridB.notation}") {
+            it(s"$expected") {
+              val set = GridPointSet(gridA, gridB)
 
-            assert(set.isConnected == expected)
+              assert(set.isConnected == expected)
+            }
+          }
+        }
+      }
+    }
+    describe("格子点がA,B,Cの3つ") {
+      val set = Table(
+        ("case name", "gird a", "grid b", "grid c", "expected"),
+        ("A,B,C全て隣接", GridPoint(4, 7), GridPoint(3, 7), GridPoint(4, 6), true),
+        ("A,Bが隣接", GridPoint(4, 7), GridPoint(3, 7), GridPoint(2, 6), false),
+      )
+
+      forAll(set) { (caseName, gridA, gridB, gridC, expected) =>
+        describe(caseName) {
+          describe(
+            s"A: ${gridA.notation} B: ${gridB.notation} C: ${gridC.notation}"
+          ) {
+            it(s"$expected") {
+              val set = GridPointSet(gridA, gridB, gridC)
+
+              assert(set.isConnected == expected)
+            }
           }
         }
       }

@@ -14,12 +14,12 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *   [x] x/y座標両方違う→false
  * [ ] ２つの格子点が 隣り合っている(neighbor)かを判定しよう
  *   (補足) 格子点(x,y)は、４つの格子点(x-1,y),(x+1,y),(x,y-1),(x,y+1)と隣り合っているものとします
- *   [ ] x-1 : true
- *   [ ] x+1 : true
+ *   [x] x-1 : true
+ *   [x] x+1 : true
  *   [ ] y+1 : true
  *   [ ] y-1 : true
- *   [ ] x-2 : false
- *   [ ] x+2 : false
+ *   [x] x-2 : false
+ *   [x] x+2 : false
  *   [ ] y-2 : false
  *   [ ] y+2 : false
  *   [ ] x-1 y-1 : false
@@ -83,6 +83,7 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         ("x-1", GridPoint(3, 7), true),
         ("x+1", GridPoint(5, 7), true),
         ("x-2", GridPoint(2, 7), false),
+        ("x+2", GridPoint(6, 7), false),
       )
 
       forAll(grids) { (caseName, gridB, expected) =>

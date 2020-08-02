@@ -12,7 +12,7 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *   [x] x座標だけ同じ→false
  *   [x] y座標だけ同じ→false
  *   [x] x/y座標両方違う→false
- * [ ] ２つの格子点が 隣り合っている(neighbor)かを判定しよう
+ * [x] ２つの格子点が 隣り合っている(neighbor)かを判定しよう
  *   (補足) 格子点(x,y)は、４つの格子点(x-1,y),(x+1,y),(x,y-1),(x,y+1)と隣り合っているものとします
  *   [x] x-1 : true
  *   [x] x+1 : true

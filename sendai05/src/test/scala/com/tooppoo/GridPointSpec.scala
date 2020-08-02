@@ -16,8 +16,8 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *   (補足) 格子点(x,y)は、４つの格子点(x-1,y),(x+1,y),(x,y-1),(x,y+1)と隣り合っているものとします
  *   [x] x-1 : true
  *   [x] x+1 : true
+ *   [x] y-1 : true
  *   [ ] y+1 : true
- *   [ ] y-1 : true
  *   [x] x-2 : false
  *   [x] x+2 : false
  *   [ ] y-2 : false
@@ -82,6 +82,7 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         ("case name", "gridB", "expected"),
         ("x-1", GridPoint(3, 7), true),
         ("x+1", GridPoint(5, 7), true),
+        ("y-1", GridPoint(4, 6), true),
         ("x-2", GridPoint(2, 7), false),
         ("x+2", GridPoint(6, 7), false),
       )

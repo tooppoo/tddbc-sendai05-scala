@@ -28,6 +28,9 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *     [ ] 3つの格子点を受け取れるようにする
  *       [x] 全ての格子点の座標が異なる: OK
  *       [ ] 2つの格子点の座標が同じ  : NG
+ *         [ ] A・B・Cのうち、A・Bが一致
+ *         [ ] A・B・Cのうち、B・Cが一致
+ *         [ ] A・B・Cのうち、C・Aが一致
  *       [ ] 全ての格子点の座標が同じ  : NG
  */
 
@@ -56,15 +59,17 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
     }
 
     describe("生成できない") {
-      val cases = Table(
-        ("case name", "create set"),
-        ("2つの格子点が同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7)))
-      )
+      describe("格子点が2つ") {
+        val cases = Table(
+          ("case name", "create set"),
+          ("2つの格子点が同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7)))
+        )
 
-      forAll(cases) { (caseName, create) =>
-        it(caseName) {
-          assertThrows[IllegalArgumentException] {
-            create()
+        forAll(cases) { (caseName, create) =>
+          it(caseName) {
+            assertThrows[IllegalArgumentException] {
+              create()
+            }
           }
         }
       }

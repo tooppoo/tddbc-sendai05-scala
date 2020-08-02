@@ -9,10 +9,10 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *   [x] GridPointSetは２つの格子点を持つ
  *     [x] 2つの格子点が異なる座標を持つ
  *     [x] 2つの格子点が同じ座標を持つ
- *   [ ] 格子点集合が、指定した格子点を含む(contains)かを判定してください
- *     [ ] 格子点Aと一致 : true
- *     [ ] 格子点Bと一致 : true
- *     [ ] 格子点A/B両方と不一致 : false
+ *   [x] 格子点集合が、指定した格子点を含む(contains)かを判定してください
+ *     [x] 格子点Aと一致 : true
+ *     [x] 格子点Bと一致 : true
+ *     [x] 格子点A/B両方と不一致 : false
  *   [ ] 格子点集合が連結している(connected)かを判定してください
  *       (補足) 格子点集合に含まれる２つの格子点が隣り合っている場合に限り、その格子点集合が連結しているものとします
  */
@@ -46,7 +46,9 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
 
       val grids = Table(
         ("case name", "grid", "expected"),
-        ("Aと一致", GridPoint(4, 7), true)
+        ("Aと一致", GridPoint(4, 7), true),
+        ("Bと一致", GridPoint(2, 5), true),
+        ("A/B両方と不一致", GridPoint(3, 6), false),
       )
 
       forAll(grids) { (caseName, grid, expected) =>

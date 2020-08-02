@@ -40,7 +40,6 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         その格子点から隣り合っている格子点のみを経由して
  *         その他全ての格子点へ到達できる場合に限り
  *         その格子点集合が連結しているものとします
- *         →全ての格子点が連結している場合に、集合は連結している
  *         [ ] A,B,C が連結: true
  *         [ ] A,B が連結: false
  *         [ ] B,C が連結: false
@@ -179,8 +178,8 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
     describe("格子点がA,B,Cの3つ") {
       val set = Table(
         ("case name", "gird a", "grid b", "grid c", "expected"),
-        ("A,B,C全て隣接", GridPoint(4, 7), GridPoint(3, 7), GridPoint(4, 6), true),
-        ("A,Bが隣接", GridPoint(4, 7), GridPoint(3, 7), GridPoint(2, 6), false),
+        ("A,B,C全て隣接", GridPoint(4, 4), GridPoint(3, 4), GridPoint(4, 5), true),
+        ("A,Bが隣接", GridPoint(4, 4), GridPoint(3, 4), GridPoint(3, 5), false),
       )
 
       forAll(set) { (caseName, gridA, gridB, gridC, expected) =>

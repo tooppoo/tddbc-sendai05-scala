@@ -28,21 +28,31 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
   describe("格子点集合の生成") {
     describe("生成できる") {
-      it("2つの格子点が異なる座標を持つ") {
-        val g1 = GridPoint(4, 7)
-        val g2 = GridPoint(3, 6)
+      val cases = Table(
+        ("case name", "create set"),
+        ("2つの格子点が異なる座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(3, 6))),
+      )
 
-        GridPointSet(g1, g2)
+      forAll(cases) { (caseName, create) =>
+        it(caseName) {
+          create()
+
+          succeed // 例外が起きなければOK
+        }
       }
     }
 
     describe("生成できない") {
-      it("2つの格子点が同じ座標を持つ") {
-        val g1 = GridPoint(4, 7)
-        val g2 = GridPoint(4, 7)
+      val cases = Table(
+        ("case name", "create set"),
+        ("2つの格子点が同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7)))
+      )
 
-        assertThrows[IllegalArgumentException] {
-          GridPointSet(g1, g2)
+      forAll(cases) { (caseName, create) =>
+        it(caseName) {
+          assertThrows[IllegalArgumentException] {
+            create()
+          }
         }
       }
     }

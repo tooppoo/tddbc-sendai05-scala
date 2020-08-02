@@ -24,9 +24,9 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *   [x] y+2 : false
  *   [x] x-1 y-1 : false
  *   [x] x-1 y+1 : false
- *   [ ] x+1 y-1 : false
- *   [ ] x+1 y+1 : false
- *   [ ] x+0 y+0 : false
+ *   [x] x+1 y-1 : false
+ *   [x] x+1 y+1 : false
+ *   [x] x+0 y+0 : false
  */
 
 class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -94,6 +94,9 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         ("x-1 y-1", GridPoint(3, 6), false),
         ("x-1 y+1", GridPoint(3, 8), false),
         ("x+1 y-1", GridPoint(5, 6), false),
+        ("x+1 y+1", GridPoint(5, 8), false),
+
+        ("x+0 y+0", GridPoint(4, 7), false),
       )
 
       forAll(grids) { (caseName, gridB, expected) =>

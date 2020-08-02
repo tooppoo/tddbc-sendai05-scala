@@ -93,6 +93,7 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
 
         ("x-1 y-1", GridPoint(3, 6), false),
         ("x-1 y+1", GridPoint(3, 8), false),
+        ("x+1 y-1", GridPoint(5, 6), false),
       )
 
       forAll(grids) { (caseName, gridB, expected) =>

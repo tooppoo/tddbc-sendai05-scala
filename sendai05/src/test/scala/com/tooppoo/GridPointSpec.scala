@@ -75,4 +75,21 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
       }
     }
   }
+  describe("格子点Aと格子点Bが 隣り合っているか") {
+    describe("A = (4,7)") {
+      val gridA = GridPoint(4, 7)
+      val grids = Table(
+        ("case name", "gridB", "expected"),
+        ("x-1", GridPoint(3, 7), true)
+      )
+
+      forAll(grids) { (caseName, gridB, expected) =>
+        describe(caseName) {
+          it(s"$expected") {
+            assert((gridA isNeighborOf gridB) == expected)
+          }
+        }
+      }
+    }
+  }
 }

@@ -13,8 +13,16 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *     [x] 格子点Aと一致 : true
  *     [x] 格子点Bと一致 : true
  *     [x] 格子点A/B両方と不一致 : false
- *   [ ] 格子点集合が連結している(connected)かを判定してください
+ *   [x] 格子点集合が連結している(connected)かを判定してください
  *       (補足) 格子点集合に含まれる２つの格子点が隣り合っている場合に限り、その格子点集合が連結しているものとします
+ *     [x] AがBの左
+ *     [x] AがBの左上
+ *     [x] AがBの上
+ *     [x] AがBの右上
+ *     [x] AがBの右
+ *     [x] AがBの右下
+ *     [x] AがBの下
+ *     [x] AがBの左下
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -63,7 +71,14 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
   describe("格子点集合が連結している(connected)か") {
     val set = Table(
       ("case name", "gird a", "grid b", "expected"),
-      ("AがBの左隣", GridPoint(4, 7), GridPoint(5, 7), true)
+      ("AがBの左隣", GridPoint(4, 7), GridPoint(5, 7), true),
+      ("AがBの左上", GridPoint(4, 8), GridPoint(5, 7), false),
+      ("AがBの上", GridPoint(5, 8), GridPoint(5, 7), true),
+      ("AがBの右上", GridPoint(6, 8), GridPoint(5, 7), false),
+      ("AがBの右", GridPoint(6, 7), GridPoint(5, 7), true),
+      ("AがBの右下", GridPoint(6, 6), GridPoint(5, 7), false),
+      ("AがBの下", GridPoint(5, 6), GridPoint(5, 7), true),
+      ("AがBの左下", GridPoint(4, 6), GridPoint(5, 7), false),
     )
 
     forAll(set) { (caseName, gridA, gridB, expected) =>

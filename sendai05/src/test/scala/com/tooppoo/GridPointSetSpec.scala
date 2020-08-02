@@ -50,7 +50,7 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         [x] B-C 連結 （ | . )   : false
  *         [x] A-C 連結 （ | . )   : false
  *         [x] 連結無し （ . . . )   : false
- *     [ ] 格子点集合から、格子点集合に含まれている格子点の数(count)を取得してください
+ *     [x] 格子点集合から、格子点集合に含まれている格子点の数(count)を取得してください
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -217,13 +217,6 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         val set = GridPointSet(GridPoint(3, 4), GridPoint(4, 5))
 
         assert(set.count == 2)
-      }
-    }
-    describe("集合[A, B, C]") {
-      it("3") {
-        val set = GridPointSet(GridPoint(3, 4), GridPoint(4, 5), GridPoint(2, 1))
-
-        assert(set.count == 3)
       }
     }
   }

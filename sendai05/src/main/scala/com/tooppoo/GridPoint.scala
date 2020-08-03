@@ -9,11 +9,8 @@ case class GridPoint(x: Int, y: Int) {
     isUpFrom(other) ||
     isDownFrom(other)
 
-  private def isLeftFrom(other: GridPoint): Boolean = x - 1 == other.x && ySameWith(other)
-  private def isRightFrom(other: GridPoint): Boolean = x + 1 == other.x && ySameWith(other)
-  private def isUpFrom(other: GridPoint): Boolean = xSameWith(other) && y - 1 == other.y
-  private def isDownFrom(other: GridPoint): Boolean = xSameWith(other) && y + 1 == other.y
-
-  private def xSameWith(other: GridPoint): Boolean = x == other.x
-  private def ySameWith(other: GridPoint): Boolean = y == other.y
+  private def isLeftFrom(other: GridPoint): Boolean = x - 1 == other.x && y == other.y
+  private def isRightFrom(other: GridPoint): Boolean = x + 1 == other.x && y == other.y
+  private def isUpFrom(other: GridPoint): Boolean = x == other.x && y - 1 == other.y
+  private def isDownFrom(other: GridPoint): Boolean = x == other.x && y + 1 == other.y
 }

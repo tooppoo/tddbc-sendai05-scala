@@ -53,7 +53,13 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *     [x] 格子点集合から、格子点集合に含まれている格子点の数(count)を取得してください
  *  [ ] 格子点集合を、異なる２〜４つの格子点を含むことが出来るように拡張してください
  *     [ ] 4つの格子点を受け取れるようにする
- *       [ ] 全ての格子点の座標が異なる: OK
+ *       [x] 全ての格子点の座標が異なる: OK
+ *       [x] A・Dの座標が同じ  : NG
+ *       [x] B・Dの座標が同じ  : NG
+ *       [x] C・Dの座標が同じ  : NG
+ *       [ ] A・B・Dの座標が同じ  : NG
+ *       [ ] A・C・Dの座標が同じ  : NG
+ *       [ ] B・C・Dの座標が同じ  : NG
  *       [ ] 全ての格子点の座標が同じ  : NG
  */
 
@@ -70,6 +76,10 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
           "3つの格子点が異なる座標を持つ",
           () => GridPointSet(GridPoint(4, 7), GridPoint(3, 6), GridPoint(2, 4))
         ),
+        (
+          "4つの格子点が異なる座標を持つ",
+          () => GridPointSet(GridPoint(4, 7), GridPoint(3, 6), GridPoint(2, 4), GridPoint(1, 2))
+        )
       )
 
       forAll(cases) { (caseName, create) =>
@@ -103,6 +113,26 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
           ("B・Cが同じ座標を持つ", () => GridPointSet(GridPoint(3, 2), GridPoint(4, 7), GridPoint(4, 7))),
           ("C・Aが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(3, 2), GridPoint(4, 7))),
           ("全て同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
+        )
+
+        forAll(cases) { (caseName, create) =>
+          it(caseName) {
+            assertThrows[IllegalArgumentException] {
+              create()
+            }
+          }
+        }
+      }
+      describe("格子点が4つ[A, B, C, D]") {
+        val cases = Table(
+          ("case name", "create set"),
+          ("A・Dが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(3, 7), GridPoint(2, 7), GridPoint(4, 7))),
+          ("B・Dが同じ座標を持つ", () => GridPointSet(GridPoint(3, 7), GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7))),
+          ("C・Dが同じ座標を持つ", () => GridPointSet(GridPoint(3, 7), GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("A・B・Dが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7))),
+          ("A・C・Dが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("B・C・Dが同じ座標を持つ", () => GridPointSet(GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("全て同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
         )
 
         forAll(cases) { (caseName, create) =>

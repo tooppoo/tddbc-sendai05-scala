@@ -24,18 +24,18 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
   )
 
   def isTraversable: Boolean = allGrids.exists(g =>
-    tryTraverse(g, allGrids.filterNot(g.==))
+    canTraverseFrom(g, allGrids.filterNot(g.==))
   )
 
   /**
    * @return 一筆書きに成功したらtrue
    */
   @tailrec
-  private def tryTraverse(start: GridPoint, candidate: Seq[GridPoint]): Boolean =
+  private def canTraverseFrom(start: GridPoint, candidate: Seq[GridPoint]): Boolean =
     candidate match {
       case last :: Nil => start isNeighborOf last
       case list => list.find(start.isNeighborOf) match {
-        case Some(next) => tryTraverse(next, list.filterNot(next.==))
+        case Some(next) => canTraverseFrom(next, list.filterNot(next.==))
         case None => false
       }
     }

@@ -61,16 +61,22 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *       [x] A・C・Dの座標が同じ  : NG
  *       [x] B・C・Dの座標が同じ  : NG
  *       [x] 全ての格子点の座標が同じ  : NG
- *  [ ] 格子点集合が一筆書きできるか(traversable)を判定してください
+ *  [x] 格子点集合が一筆書きできるか(traversable)を判定してください
  *     (補足) 格子点集合に含まれるある格子点について
  *     その格子点から隣り合っている格子点のみを経由して
  *     最終的に全ての格子点をちょうど一度ずつ経由する組み合わせがある場合に限り
  *     その格子点集合が一筆書きできるものとします
- *     [ ] 2点
- *       [ ] 隣接している  : true
- *       [ ] 隣接していない: false
- *     [ ] 3点
- *     [ ] 4点
+ *     [x] 2点
+ *       [x] 隣接している  : true
+ *       [x] 隣接していない: false
+ *     [x] 3点
+ *       [x] 連結している : true
+ *       [x] 連結していない : false
+ *     [x] 4点
+ *       [x] --- で連結 : true
+ *         [x] 先頭の点 = 一番目の点 : true
+ *         [x] 先頭の点 = 二番目の点 : true
+ *       [x] _|_ で連結 : false
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -295,10 +301,10 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
     describe("3点") {
       val set = Table(
         ("case name", "set", "expected"),
-        ("隣接している: |_", GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3)), true),
-        ("隣接している: --", GridPointSet(GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4)), true),
-        ("隣接していない: | .", GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3)), false),
-        ("隣接していない: . . .", GridPointSet(GridPoint(4, 4), GridPoint(5, 5), GridPoint(6, 6)), false),
+        ("連結している: |_", GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3)), true),
+        ("連結している: --", GridPointSet(GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4)), true),
+        ("連結していない: | .", GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3)), false),
+        ("連結していない: . . .", GridPointSet(GridPoint(4, 4), GridPoint(5, 5), GridPoint(6, 6)), false),
       )
       forAll(set) { (caseName, set, expected) =>
         describe(caseName) {

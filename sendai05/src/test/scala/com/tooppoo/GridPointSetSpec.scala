@@ -61,6 +61,11 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *       [x] A・C・Dの座標が同じ  : NG
  *       [x] B・C・Dの座標が同じ  : NG
  *       [x] 全ての格子点の座標が同じ  : NG
+ *     [ ] 連結
+ *       [ ] --- : true
+ *       [ ] _|_ : true
+ *       [ ] _ | : false
+ *       [ ] . | . : false
  *  [x] 格子点集合が一筆書きできるか(traversable)を判定してください
  *     (補足) 格子点集合に含まれるある格子点について
  *     その格子点から隣り合っている格子点のみを経由して
@@ -260,6 +265,38 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         describe(caseName) {
           describe(
             s"A: ${gridA.notation} B: ${gridB.notation} C: ${gridC.notation}"
+          ) {
+            it(s"$expected") {
+              val set = GridPointSet(gridA, gridB, gridC)
+
+              assert(set.isConnected == expected)
+            }
+          }
+        }
+      }
+    }
+    describe("格子点がA,B,C,Dの4つ") {
+      val set = Table(
+        (
+          "case name",
+          "gird a", "grid b", "grid c", "grid d",
+          "expected"
+        ),
+        (
+          "A-B, B-C, C-D 連結: ---",
+          GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4), GridPoint(7, 4),
+          true
+        ),
+        (
+          "A-B, B-C, B-D 連結: _|_",
+          GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4), GridPoint(5, 5),
+          true
+        ),
+      )
+      forAll(set) { (caseName, gridA, gridB, gridC, gridD, expected) =>
+        describe(caseName) {
+          describe(
+            s"A: ${gridA.notation} B: ${gridB.notation} C: ${gridC.notation} D: ${gridD.notation}"
           ) {
             it(s"$expected") {
               val set = GridPointSet(gridA, gridB, gridC)

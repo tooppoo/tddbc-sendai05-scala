@@ -30,8 +30,8 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
     case _ => false
   }
 
-  def isTraversable: Boolean = allGrids.exists(
-    g => tryTraverse(g, allGrids.filterNot(g.==))
+  def isTraversable: Boolean = allGrids.exists(g =>
+    tryTraverse(g, allGrids.filterNot(g.==))
   )
 
   /**

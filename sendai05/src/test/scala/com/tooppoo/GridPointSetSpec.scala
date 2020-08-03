@@ -310,5 +310,28 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         }
       }
     }
+    describe("4点") {
+      val set = Table(
+        (
+          "case name",
+          "set",
+          "expected"
+        ),
+        (
+          "最初の点から一筆書きできる: |_|",
+          GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3), GridPoint(5, 4)),
+          true
+        ),
+      )
+      forAll(set) { (caseName, set, expected) =>
+        describe(caseName) {
+          describe(set.notation) {
+            it(s"$expected") {
+              assert(set.isTraversable == expected)
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -1,5 +1,7 @@
 package com.tooppoo
 
+import scala.annotation.tailrec
+
 class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
   private val allGrids: Seq[GridPoint] = Seq(g1, g2) concat grids
 
@@ -28,7 +30,22 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
     case _ => false
   }
 
-  def isTraversable: Boolean = isConnected
+  def isTraversable: Boolean = allGrids.exists(
+    g => tryTraverse(g, allGrids.filterNot(g.==))
+  )
+
+  /**
+   * @return 一筆書きに成功したらtrue
+   */
+  @tailrec
+  private def tryTraverse(start: GridPoint, candidate: Seq[GridPoint]): Boolean =
+    candidate match {
+      case last :: Nil => start isNeighborOf last
+      case list => list.find(start.isNeighborOf) match {
+        case Some(next) => tryTraverse(next, list.filterNot(next.==))
+        case None => false
+      }
+    }
 
   private def existDuplicateGrid: Boolean = {
     val groupedByNotation = allGrids.groupBy(g => g.notation)

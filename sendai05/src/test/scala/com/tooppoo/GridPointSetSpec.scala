@@ -66,6 +66,11 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *     その格子点から隣り合っている格子点のみを経由して
  *     最終的に全ての格子点をちょうど一度ずつ経由する組み合わせがある場合に限り
  *     その格子点集合が一筆書きできるものとします
+ *     [ ] 2点
+ *       [ ] 隣接している  : true
+ *       [ ] 隣接していない: false
+ *     [ ] 3点
+ *     [ ] 4点
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
@@ -266,6 +271,24 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
         val set = GridPointSet(GridPoint(3, 4), GridPoint(4, 5))
 
         assert(set.count == 2)
+      }
+    }
+  }
+  describe("格子点集合が一筆書きできるか(traversable)") {
+    describe("2点") {
+      val set = Table(
+        ("case name", "set", "expected"),
+        ("隣接している", GridPointSet(GridPoint(4, 6), GridPoint(4, 7)), true),
+      )
+
+      forAll(set) { (caseName, set, expected) =>
+        describe(caseName) {
+          describe(set.notation) {
+            it(s"$expected") {
+              assert(set.isTraversable == expected)
+            }
+          }
+        }
       }
     }
   }

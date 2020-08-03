@@ -318,14 +318,24 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
           "expected"
         ),
         (
-          "最初の点から一筆書きできる: |_|",
+          "先頭の点から一筆書きできる: |_|",
           GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3), GridPoint(5, 4)),
           true
         ),
         (
-          "途中の点から一筆書きできる: |_|",
+          "二番目の点から一筆書きできる: |_|",
           GridPointSet(GridPoint(4, 4), GridPoint(4, 5), GridPoint(5, 3), GridPoint(5, 4)),
           true
+        ),
+        (
+          "一筆書きできない: | _",
+          GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3), GridPoint(7, 3)),
+          false
+        ),
+        (
+          "一筆書きできない: _|_",
+          GridPointSet(GridPoint(4, 4), GridPoint(3, 4), GridPoint(5, 4), GridPoint(4, 5)),
+          false
         ),
       )
       forAll(set) { (caseName, set, expected) =>

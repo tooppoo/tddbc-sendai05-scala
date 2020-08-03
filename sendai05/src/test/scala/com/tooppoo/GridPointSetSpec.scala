@@ -82,6 +82,11 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         [x] 先頭の点 = 一番目の点 : true
  *         [x] 先頭の点 = 二番目の点 : true
  *       [x] _|_ で連結 : false
+ *   [x] 格子点集合を、異なるN個の格子点(Nは2以上の整数)が扱えるように拡張
+ *   [ ] 格子点及び格子点集合を、３次元座標上で扱えるように拡張してください
+ *       ２次元座標上の格子点／格子点集合と
+ *       ３次元座標上の格子点／格子点集合を
+ *       同時に扱える必要はありません
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {

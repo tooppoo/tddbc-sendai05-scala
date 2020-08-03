@@ -61,6 +61,11 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *       [x] A・C・Dの座標が同じ  : NG
  *       [x] B・C・Dの座標が同じ  : NG
  *       [x] 全ての格子点の座標が同じ  : NG
+ *  [ ] 格子点集合が一筆書きできるか(traversable)を判定してください
+ *     (補足) 格子点集合に含まれるある格子点について
+ *     その格子点から隣り合っている格子点のみを経由して
+ *     最終的に全ての格子点をちょうど一度ずつ経由する組み合わせがある場合に限り
+ *     その格子点集合が一筆書きできるものとします
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {

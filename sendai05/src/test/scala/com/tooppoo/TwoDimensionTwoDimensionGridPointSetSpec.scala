@@ -96,15 +96,15 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
         ("case name", "create set"),
         (
           "2つの格子点が異なる座標を持つ",
-          () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(3, 6))
+          () => GridPointSet(GridPoint(4, 7), GridPoint(3, 6))
         ),
         (
           "3つの格子点が異なる座標を持つ",
-          () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(3, 6), GridPoint(2, 4))
+          () => GridPointSet(GridPoint(4, 7), GridPoint(3, 6), GridPoint(2, 4))
         ),
         (
           "4つの格子点が異なる座標を持つ",
-          () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(3, 6), GridPoint(2, 4), GridPoint(1, 2))
+          () => GridPointSet(GridPoint(4, 7), GridPoint(3, 6), GridPoint(2, 4), GridPoint(1, 2))
         )
       )
 
@@ -121,7 +121,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
       describe("格子点が2つ") {
         val cases = Table(
           ("case name", "create set"),
-          ("2つの格子点が同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(4, 7)))
+          ("2つの格子点が同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7)))
         )
 
         forAll(cases) { (caseName, create) =>
@@ -135,10 +135,10 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
       describe("格子点が3つ[A, B, C]") {
         val cases = Table(
           ("case name", "create set"),
-          ("A・Bが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(3, 2))),
-          ("B・Cが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(3, 2), GridPoint(4, 7), GridPoint(4, 7))),
-          ("C・Aが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(3, 2), GridPoint(4, 7))),
-          ("全て同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("A・Bが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(3, 2))),
+          ("B・Cが同じ座標を持つ", () => GridPointSet(GridPoint(3, 2), GridPoint(4, 7), GridPoint(4, 7))),
+          ("C・Aが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(3, 2), GridPoint(4, 7))),
+          ("全て同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
         )
 
         forAll(cases) { (caseName, create) =>
@@ -152,13 +152,13 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
       describe("格子点が4つ[A, B, C, D]") {
         val cases = Table(
           ("case name", "create set"),
-          ("A・Dが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(3, 7), GridPoint(2, 7), GridPoint(4, 7))),
-          ("B・Dが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(3, 7), GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7))),
-          ("C・Dが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(3, 7), GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7))),
-          ("A・B・Dが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7))),
-          ("A・C・Dが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7))),
-          ("B・C・Dが同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
-          ("全て同じ座標を持つ", () => TwoDimensionGridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("A・Dが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(3, 7), GridPoint(2, 7), GridPoint(4, 7))),
+          ("B・Dが同じ座標を持つ", () => GridPointSet(GridPoint(3, 7), GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7))),
+          ("C・Dが同じ座標を持つ", () => GridPointSet(GridPoint(3, 7), GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("A・B・Dが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7))),
+          ("A・C・Dが同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("B・C・Dが同じ座標を持つ", () => GridPointSet(GridPoint(2, 7), GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
+          ("全て同じ座標を持つ", () => GridPointSet(GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7), GridPoint(4, 7))),
         )
 
         forAll(cases) { (caseName, create) =>
@@ -175,7 +175,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
     describe("[4,6], [4,7]") {
       val a = GridPoint(4, 6)
       val b = GridPoint(4, 7)
-      val set = TwoDimensionGridPointSet(a, b)
+      val set = GridPointSet(a, b)
       it("[(4,6),(4,7)]") {
         assert(set.notation == "[(4,6),(4,7)]")
       }
@@ -185,7 +185,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
     describe("A: (4,7), B: (2, 5)") {
       val a = GridPoint(4, 7)
       val b = GridPoint(2, 5)
-      val set = TwoDimensionGridPointSet(a, b)
+      val set = GridPointSet(a, b)
 
       val grids = Table(
         ("case name", "grid", "expected"),
@@ -206,7 +206,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
       val a = GridPoint(4, 7)
       val b = GridPoint(2, 5)
       val c = GridPoint(3, 6)
-      val set = TwoDimensionGridPointSet(a, b, c)
+      val set = GridPointSet(a, b, c)
 
       val grids = Table(
         ("case name", "grid", "expected"),
@@ -243,7 +243,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
         describe(caseName) {
           describe(s"A: ${gridA.notation} B: ${gridB.notation}") {
             it(s"$expected") {
-              val set = TwoDimensionGridPointSet(gridA, gridB)
+              val set = GridPointSet(gridA, gridB)
 
               assert(set.isConnected == expected)
             }
@@ -272,7 +272,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
             s"A: ${gridA.notation} B: ${gridB.notation} C: ${gridC.notation}"
           ) {
             it(s"$expected") {
-              val set = TwoDimensionGridPointSet(gridA, gridB, gridC)
+              val set = GridPointSet(gridA, gridB, gridC)
 
               assert(set.isConnected == expected)
             }
@@ -314,7 +314,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
             s"A: ${gridA.notation} B: ${gridB.notation} C: ${gridC.notation} D: ${gridD.notation}"
           ) {
             it(s"$expected") {
-              val set = TwoDimensionGridPointSet(gridA, gridB, gridC, gridD)
+              val set = GridPointSet(gridA, gridB, gridC, gridD)
 
               assert(set.isConnected == expected)
             }
@@ -326,7 +326,7 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
   describe("格子点集合から、格子点集合に含まれている格子点の数(count)を取得") {
     describe("集合[A, B]") {
       it("2") {
-        val set = TwoDimensionGridPointSet(GridPoint(3, 4), GridPoint(4, 5))
+        val set = GridPointSet(GridPoint(3, 4), GridPoint(4, 5))
 
         assert(set.count == 2)
       }
@@ -336,8 +336,8 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
     describe("2点") {
       val set = Table(
         ("case name", "set", "expected"),
-        ("隣接している", TwoDimensionGridPointSet(GridPoint(4, 6), GridPoint(4, 7)), true),
-        ("隣接していない", TwoDimensionGridPointSet(GridPoint(4, 6), GridPoint(3, 7)), false),
+        ("隣接している", GridPointSet(GridPoint(4, 6), GridPoint(4, 7)), true),
+        ("隣接していない", GridPointSet(GridPoint(4, 6), GridPoint(3, 7)), false),
       )
 
       forAll(set) { (caseName, set, expected) =>
@@ -353,10 +353,10 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
     describe("3点") {
       val set = Table(
         ("case name", "set", "expected"),
-        ("連結している: |_", TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3)), true),
-        ("連結している: --", TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4)), true),
-        ("連結していない: | .", TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3)), false),
-        ("連結していない: . . .", TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(5, 5), GridPoint(6, 6)), false),
+        ("連結している: |_", GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3)), true),
+        ("連結している: --", GridPointSet(GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4)), true),
+        ("連結していない: | .", GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3)), false),
+        ("連結していない: . . .", GridPointSet(GridPoint(4, 4), GridPoint(5, 5), GridPoint(6, 6)), false),
       )
       forAll(set) { (caseName, set, expected) =>
         describe(caseName) {
@@ -377,22 +377,22 @@ class TwoDimensionTwoDimensionGridPointSetSpec extends AnyFunSpec with TableDriv
         ),
         (
           "先頭の点から一筆書きできる: |_|",
-          TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3), GridPoint(5, 4)),
+          GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(5, 3), GridPoint(5, 4)),
           true
         ),
         (
           "二番目の点から一筆書きできる: |_|",
-          TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(4, 5), GridPoint(5, 3), GridPoint(5, 4)),
+          GridPointSet(GridPoint(4, 4), GridPoint(4, 5), GridPoint(5, 3), GridPoint(5, 4)),
           true
         ),
         (
           "一筆書きできない: | _",
-          TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3), GridPoint(7, 3)),
+          GridPointSet(GridPoint(4, 4), GridPoint(4, 3), GridPoint(6, 3), GridPoint(7, 3)),
           false
         ),
         (
           "一筆書きできない: _|_",
-          TwoDimensionGridPointSet(GridPoint(4, 4), GridPoint(3, 4), GridPoint(5, 4), GridPoint(4, 5)),
+          GridPointSet(GridPoint(4, 4), GridPoint(3, 4), GridPoint(5, 4), GridPoint(4, 5)),
           false
         ),
       )

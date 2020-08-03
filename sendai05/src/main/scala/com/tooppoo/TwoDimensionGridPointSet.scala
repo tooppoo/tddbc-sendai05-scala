@@ -2,7 +2,7 @@ package com.tooppoo
 
 import scala.annotation.tailrec
 
-class TwoDimensionGridPointSet private(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPoint, grids: TwoDimensionGridPoint*) {
+class TwoDimensionGridPointSet(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPoint, grids: TwoDimensionGridPoint*) {
   private val allGrids: Seq[TwoDimensionGridPoint] = Seq(g1, g2) concat grids
 
   val count: Int = allGrids.size
@@ -48,7 +48,7 @@ class TwoDimensionGridPointSet private(g1: TwoDimensionGridPoint, g2: TwoDimensi
   }
 }
 
-object TwoDimensionGridPointSet {
+object GridPointSet {
   def apply(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPoint, grids: TwoDimensionGridPoint*) =
     new TwoDimensionGridPointSet(g1, g2, grids: _*)
 }

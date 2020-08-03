@@ -2,8 +2,8 @@ package com.tooppoo
 
 import scala.annotation.tailrec
 
-class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
-  private val allGrids: Seq[GridPoint] = Seq(g1, g2) concat grids
+class TwoDimensionGridPointSet private(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPoint, grids: TwoDimensionGridPoint*) {
+  private val allGrids: Seq[TwoDimensionGridPoint] = Seq(g1, g2) concat grids
 
   val count: Int = allGrids.size
 
@@ -17,7 +17,7 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
     s"[$points]"
   }
 
-  def contains(grid: GridPoint): Boolean = allGrids.contains(grid)
+  def contains(grid: TwoDimensionGridPoint): Boolean = allGrids.contains(grid)
 
   def isConnected: Boolean = allGrids.forall(
     g => allGrids.filterNot(g.==).exists(g.isNeighborOf)
@@ -31,7 +31,7 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
    * @return 一筆書きに成功したらtrue
    */
   @tailrec
-  private def canTraverseFrom(start: GridPoint, candidate: Seq[GridPoint]): Boolean =
+  private def canTraverseFrom(start: TwoDimensionGridPoint, candidate: Seq[TwoDimensionGridPoint]): Boolean =
     candidate match {
       case last :: Nil => start isNeighborOf last
       case list => list.find(start.isNeighborOf) match {
@@ -48,7 +48,7 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
   }
 }
 
-object GridPointSet {
-  def apply(g1: GridPoint, g2: GridPoint, grids: GridPoint*) =
-    new GridPointSet(g1, g2, grids: _*)
+object TwoDimensionGridPointSet {
+  def apply(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPoint, grids: TwoDimensionGridPoint*) =
+    new TwoDimensionGridPointSet(g1, g2, grids: _*)
 }

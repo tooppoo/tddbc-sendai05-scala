@@ -29,10 +29,10 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *   [x] x+0 y+0 : false
  */
 
-class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
+class TwoDimensionGridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
   describe("文字列表記") {
     describe("x = 4, y = 7") {
-      val p4_7 = GridPoint(4, 7)
+      val p4_7 = TwoDimensionGridPoint(4, 7)
 
       it("'(4,7)'") {
         assert(p4_7.notation == "(4,7)")
@@ -41,7 +41,7 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
   }
   describe("座標取得") {
     describe("x = 4, y = 7") {
-      val p4_7 = GridPoint(4, 7)
+      val p4_7 = TwoDimensionGridPoint(4, 7)
 
       describe("x座標") {
         it("4") {
@@ -57,14 +57,14 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
   }
   describe("格子点Aと格子点Bが同じ座標を持つか") {
     describe("A = (4,7)") {
-      val gridA = GridPoint(4, 7)
+      val gridA = TwoDimensionGridPoint(4, 7)
 
       val grids = Table(
         ("case name", "gridB", "expected"),
-        ("xとyが一致", GridPoint(4, 7), true),
-        ("xのみ一致", GridPoint(4, 6), false),
-        ("yのみ一致", GridPoint(3, 7), false),
-        ("xとy両方が不一致", GridPoint(3, 6), false),
+        ("xとyが一致", TwoDimensionGridPoint(4, 7), true),
+        ("xのみ一致", TwoDimensionGridPoint(4, 6), false),
+        ("yのみ一致", TwoDimensionGridPoint(3, 7), false),
+        ("xとy両方が不一致", TwoDimensionGridPoint(3, 6), false),
       )
 
       forAll(grids) { (caseName, gridB, expected) =>
@@ -80,25 +80,25 @@ class GridPointSpec extends AnyFunSpec with TableDrivenPropertyChecks {
   }
   describe("格子点Aと格子点Bが 隣り合っているか") {
     describe("A = (4,7)") {
-      val gridA = GridPoint(4, 7)
+      val gridA = TwoDimensionGridPoint(4, 7)
       val grids = Table(
         ("case name", "gridB", "expected"),
-        ("x-2", GridPoint(2, 7), false),
-        ("x-1", GridPoint(3, 7), true),
-        ("x+1", GridPoint(5, 7), true),
-        ("x+2", GridPoint(6, 7), false),
+        ("x-2", TwoDimensionGridPoint(2, 7), false),
+        ("x-1", TwoDimensionGridPoint(3, 7), true),
+        ("x+1", TwoDimensionGridPoint(5, 7), true),
+        ("x+2", TwoDimensionGridPoint(6, 7), false),
 
-        ("y-2", GridPoint(4, 5), false),
-        ("y-1", GridPoint(4, 6), true),
-        ("y+1", GridPoint(4, 8), true),
-        ("y+2", GridPoint(4, 9), false),
+        ("y-2", TwoDimensionGridPoint(4, 5), false),
+        ("y-1", TwoDimensionGridPoint(4, 6), true),
+        ("y+1", TwoDimensionGridPoint(4, 8), true),
+        ("y+2", TwoDimensionGridPoint(4, 9), false),
 
-        ("x-1 y-1", GridPoint(3, 6), false),
-        ("x-1 y+1", GridPoint(3, 8), false),
-        ("x+1 y-1", GridPoint(5, 6), false),
-        ("x+1 y+1", GridPoint(5, 8), false),
+        ("x-1 y-1", TwoDimensionGridPoint(3, 6), false),
+        ("x-1 y+1", TwoDimensionGridPoint(3, 8), false),
+        ("x+1 y-1", TwoDimensionGridPoint(5, 6), false),
+        ("x+1 y+1", TwoDimensionGridPoint(5, 8), false),
 
-        ("x+0 y+0", GridPoint(4, 7), false),
+        ("x+0 y+0", TwoDimensionGridPoint(4, 7), false),
       )
 
       forAll(grids) { (caseName, gridB, expected) =>

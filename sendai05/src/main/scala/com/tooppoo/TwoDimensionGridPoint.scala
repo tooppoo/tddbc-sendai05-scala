@@ -14,3 +14,7 @@ case class TwoDimensionGridPoint(x: Int, y: Int) {
   private def isUpOf(other: TwoDimensionGridPoint): Boolean = x == other.x && y - 1 == other.y
   private def isDownOf(other: TwoDimensionGridPoint): Boolean = x == other.x && y + 1 == other.y
 }
+
+object GridPoint {
+  def apply(x: Int, y: Int): TwoDimensionGridPoint = TwoDimensionGridPoint(x, y)
+}

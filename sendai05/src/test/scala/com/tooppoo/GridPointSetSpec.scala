@@ -279,6 +279,7 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
       val set = Table(
         ("case name", "set", "expected"),
         ("隣接している", GridPointSet(GridPoint(4, 6), GridPoint(4, 7)), true),
+        ("隣接していない", GridPointSet(GridPoint(4, 6), GridPoint(3, 7)), false),
       )
 
       forAll(set) { (caseName, set, expected) =>

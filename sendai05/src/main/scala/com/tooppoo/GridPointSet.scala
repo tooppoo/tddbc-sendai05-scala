@@ -28,7 +28,9 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
     case _ => false
   }
 
-  def isTraversable: Boolean = true
+  def isTraversable: Boolean = allGrids.combinations(2).forall(_ match {
+    case g1 :: g2 :: Nil => g1 isNeighborOf g2
+  })
 
   private def existDuplicateGrid: Boolean = {
     val groupedByNotation = allGrids.groupBy(g => g.notation)

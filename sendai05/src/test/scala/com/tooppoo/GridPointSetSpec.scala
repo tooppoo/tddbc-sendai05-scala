@@ -292,6 +292,11 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
           GridPoint(4, 4), GridPoint(5, 4), GridPoint(6, 4), GridPoint(5, 5),
           true
         ),
+        (
+          "B-D, C-D, D-A 連結: _|_",
+          GridPoint(4, 4), GridPoint(6, 4), GridPoint(5, 5), GridPoint(5, 4),
+          true
+        ),
       )
       forAll(set) { (caseName, gridA, gridB, gridC, gridD, expected) =>
         describe(caseName) {

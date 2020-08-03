@@ -51,16 +51,16 @@ import org.scalatest.prop.TableDrivenPropertyChecks
  *         [x] A-C 連結 （ | . )   : false
  *         [x] 連結無し （ . . . )   : false
  *     [x] 格子点集合から、格子点集合に含まれている格子点の数(count)を取得してください
- *  [ ] 格子点集合を、異なる２〜４つの格子点を含むことが出来るように拡張してください
- *     [ ] 4つの格子点を受け取れるようにする
+ *  [x] 格子点集合を、異なる２〜４つの格子点を含むことが出来るように拡張してください
+ *     [x] 4つの格子点を受け取れるようにする
  *       [x] 全ての格子点の座標が異なる: OK
  *       [x] A・Dの座標が同じ  : NG
  *       [x] B・Dの座標が同じ  : NG
  *       [x] C・Dの座標が同じ  : NG
- *       [ ] A・B・Dの座標が同じ  : NG
- *       [ ] A・C・Dの座標が同じ  : NG
- *       [ ] B・C・Dの座標が同じ  : NG
- *       [ ] 全ての格子点の座標が同じ  : NG
+ *       [x] A・B・Dの座標が同じ  : NG
+ *       [x] A・C・Dの座標が同じ  : NG
+ *       [x] B・C・Dの座標が同じ  : NG
+ *       [x] 全ての格子点の座標が同じ  : NG
  */
 
 class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {

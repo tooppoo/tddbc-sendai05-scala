@@ -31,8 +31,6 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
 }
 
 object GridPointSet {
-  def apply(g1: GridPoint, g2: GridPoint) =
-    new GridPointSet(g1, g2)
   def apply(g1: GridPoint, g2: GridPoint, grids: GridPoint*) =
     new GridPointSet(g1, g2, grids: _*)
 }

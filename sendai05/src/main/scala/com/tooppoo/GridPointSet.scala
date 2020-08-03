@@ -9,6 +9,12 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
     throw new IllegalArgumentException("g1 and g2 must not same")
   }
 
+  def notation: String = {
+    val points = allGrids.map(_.notation).mkString(",")
+
+    s"[$points]"
+  }
+
   def contains(grid: GridPoint): Boolean = allGrids.contains(grid)
 
   def isConnected: Boolean = allGrids match {

@@ -150,6 +150,16 @@ class GridPointSetSpec extends AnyFunSpec with TableDrivenPropertyChecks {
       }
     }
   }
+  describe("文字列表記") {
+    describe("[4,6], [4,7]") {
+      val a = GridPoint(4, 6)
+      val b = GridPoint(4, 7)
+      val set = GridPointSet(a, b)
+      it("[(4,6),(4,7)]") {
+        assert(set.notation == "[(4,6),(4,7)]")
+      }
+    }
+  }
   describe("格子点集合[A, B]が、指定した格子点を含む(contains)か") {
     describe("A: (4,7), B: (2, 5)") {
       val a = GridPoint(4, 7)

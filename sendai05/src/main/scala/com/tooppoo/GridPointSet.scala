@@ -19,16 +19,9 @@ class GridPointSet private (g1: GridPoint, g2: GridPoint, grids: GridPoint*) {
 
   def contains(grid: GridPoint): Boolean = allGrids.contains(grid)
 
-  def isConnected: Boolean = allGrids match {
-    case g1 :: g2 :: Nil => g1 isNeighborOf g2
-    case g1 :: g2 :: g3 :: Nil  if g1 isNeighborOf g2 =>
-      (g1 isNeighborOf g3) || (g2 isNeighborOf g3)
-    case g1 :: g2 :: g3 :: Nil  if g1 isNeighborOf g3 =>
-      (g1 isNeighborOf g2) || (g2 isNeighborOf g3)
-    case g1 :: g2 :: g3 :: Nil  if g2 isNeighborOf g3 =>
-      (g1 isNeighborOf g2) || (g1 isNeighborOf g3)
-    case _ => false
-  }
+  def isConnected: Boolean = allGrids.forall(
+    g => allGrids.filterNot(g.==).exists(g.isNeighborOf)
+  )
 
   def isTraversable: Boolean = allGrids.exists(g =>
     tryTraverse(g, allGrids.filterNot(g.==))

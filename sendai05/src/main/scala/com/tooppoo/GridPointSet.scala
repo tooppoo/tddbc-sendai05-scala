@@ -5,11 +5,11 @@ import scala.annotation.tailrec
 class TwoDimensionGridPointSet(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPoint, grids: TwoDimensionGridPoint*) {
   private val allGrids: Seq[TwoDimensionGridPoint] = Seq(g1, g2) concat grids
 
-  val count: Int = allGrids.size
-
   if (existDuplicateGrid) {
-    throw new IllegalArgumentException("g1 and g2 must not same")
+    throw new IllegalArgumentException("must not exist same grid in set")
   }
+
+  val count: Int = allGrids.size
 
   def notation: String = {
     val points = allGrids.map(_.notation).mkString(",")

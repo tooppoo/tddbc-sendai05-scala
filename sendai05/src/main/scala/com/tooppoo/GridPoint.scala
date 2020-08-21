@@ -22,35 +22,28 @@ case class TwoDimensionGridPoint(x: Int, y: Int) {
     onSameVerticalLineWith(other) && awayFrom(other, Direction.toSouth(1))
 
   private def awayFrom(other: TwoDimensionGridPoint, direction: Direction): Boolean =
-    direction test (from = other, to = this)
+    direction match {
+      case Direction.West(d) => other.x - d == x
+      case Direction.East(d) => other.x + d == x
+      case Direction.North(d) => other.y + d == y
+      case Direction.South(d) => other.y - d == y
+    }
   protected def onSameHorizontalLineWith(other: TwoDimensionGridPoint): Boolean = y == other.y
   protected def onSameVerticalLineWith(other: TwoDimensionGridPoint): Boolean = x == other.x
 
   private trait Direction {
-    def test(from: TwoDimensionGridPoint, to: TwoDimensionGridPoint): Boolean
+    val distance: Int
   }
   private object Direction {
-    final class West(private val distance: Int) extends Direction {
-      def test(from: TwoDimensionGridPoint, to: TwoDimensionGridPoint): Boolean =
-        from.x - distance == to.x
-    }
-    final class East(private val distance: Int) extends Direction {
-      def test(from: TwoDimensionGridPoint, to: TwoDimensionGridPoint): Boolean =
-        from.x + distance == to.x
-    }
-    final class North(private val distance: Int) extends Direction {
-      def test(from: TwoDimensionGridPoint, to: TwoDimensionGridPoint): Boolean =
-        from.y + distance == to.y
-    }
-    final class South(private val distance: Int) extends Direction {
-      def test(from: TwoDimensionGridPoint, to: TwoDimensionGridPoint): Boolean =
-        from.y - distance == to.y
-    }
+    case class West(distance: Int) extends Direction
+    case class East(distance: Int) extends Direction
+    case class North(distance: Int) extends Direction
+    case class South(distance: Int) extends Direction
 
-    def toWest(d: Int) = new West(d)
-    def toEast(d: Int) = new East(d)
-    def toNorth(d: Int) = new North(d)
-    def toSouth(d: Int) = new South(d)
+    def toWest(d: Int): Direction = West(d)
+    def toEast(d: Int): Direction = East(d)
+    def toNorth(d: Int): Direction = North(d)
+    def toSouth(d: Int): Direction = South(d)
   }
 }
 

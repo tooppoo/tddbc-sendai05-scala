@@ -34,8 +34,8 @@ class TwoDimensionGridPointSet(g1: TwoDimensionGridPoint, g2: TwoDimensionGridPo
   private def canTraverseFrom(start: TwoDimensionGridPoint, candidate: Seq[TwoDimensionGridPoint]): Boolean =
     candidate match {
       case last :: Nil => start isNeighborOf last
-      case list => list.find(start.isNeighborOf) match {
-        case Some(next) => canTraverseFrom(next, list.filterNot(next.==))
+      case _ => candidate.find(start.isNeighborOf) match {
+        case Some(next) => canTraverseFrom(next, candidate.filterNot(next.==))
         case None => false
       }
     }
